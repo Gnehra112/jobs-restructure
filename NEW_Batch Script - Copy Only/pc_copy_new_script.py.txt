@@ -1,0 +1,502 @@
+"""
+BATCH RESTRUCTURE SCRIPT
+-------------------------
+Runs the restructure logic across ALL customer folders in the Jobs directory.
+
+Set DRY_RUN = True to preview without copying anything.
+Set DRY_RUN = False to actually copy files (source is preserved).
+
+COPY MODE: Files are copied to D drive. Source (E drive) is never modified.
+
+Run: python batch_restructure.py
+"""
+
+import os
+import csv
+import re
+import shutil
+import openpyxl
+import xlrd
+from datetime import datetime
+
+# ── CONFIGURATION ──────────────────────────────────────────────────────────────
+
+DRY_RUN      = True   # <-- Set to False to actually copy files
+
+SOURCE_ROOT  = r"E:\5_JOB FOLDERS"
+OUTPUT_ROOT  = r"D:\\"
+DESKTOP      = r"C:\Users\gnehra\Desktop"
+
+MODE     = "DRYRUN" if DRY_RUN else "COPY"
+LOG_NAME = "batch_restructure_" + MODE + "_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".csv"
+LOG_PATH = os.path.join(DESKTOP, LOG_NAME)
+
+# Folders to skip — not customer folders
+SKIP_FOLDERS = {
+    "1_archive_2005-2011",
+    "2_canceled orders",
+}
+
+TEMPLATE_SUBFOLDERS = [
+    "1_SERVICE",
+    "2_CURP",
+    "Accounting",
+    "Art Files_Dielines",
+    "Calibration_Chart",
+    "Customer_Documentation_Package",
+    "Electrical",
+    "Manuals",
+    "Mechanical",
+    "Misc",
+    "Punchlists & Customer Sign-Offs",
+]
+
+CALIBRATION_FOLDER_VARIANTS = [
+    "manual & calibration",
+    "manual, spare & calibration",
+    "calibration",
+]
+
+# ── HELPERS ────────────────────────────────────────────────────────────────────
+
+def extract_sn_from_name(name):
+    match = re.search(r'SN(\d+)', name, re.IGNORECASE)
+    if match:
+        return match.group(1)
+    match = re.search(r'(?:^|[_\s])S(\d{4,})', name, re.IGNORECASE)
+    if match:
+        return match.group(1)
+    return None
+
+
+def extract_all_long_numbers(text):
+    return re.findall(r'\b(\d{4,})\b', text)
+
+
+def extract_sn_from_excel(filepath, sn_map=None):
+    try:
+        ext = os.path.splitext(filepath)[1].lower()
+        if ext == ".xlsx":
+            wb = openpyxl.load_workbook(filepath, read_only=True, data_only=True)
+            for sheet in wb.worksheets:
+                for row in sheet.iter_rows(values_only=True):
+                    for cell in row:
+                        if cell is None:
+                            continue
+                        val = str(cell)
+                        match = re.search(r'SN(\d+)', val, re.IGNORECASE)
+                        if match:
+                            wb.close()
+                            return match.group(1)
+                        if sn_map:
+                            for num in extract_all_long_numbers(val):
+                                matched = match_sn_to_folder(num, sn_map, silent=True)
+                                if matched:
+                                    sn_key = [k for k, v in sn_map.items() if v == matched][0]
+                                    wb.close()
+                                    return sn_key
+            wb.close()
+        elif ext in (".xls",):
+            wb = xlrd.open_workbook(filepath)
+            for sheet in wb.sheets():
+                for row in range(sheet.nrows):
+                    for col in range(sheet.ncols):
+                        val = str(sheet.cell_value(row, col))
+                        match = re.search(r'SN(\d+)', val, re.IGNORECASE)
+                        if match:
+                            return match.group(1)
+                        if sn_map:
+                            for num in extract_all_long_numbers(val):
+                                matched = match_sn_to_folder(num, sn_map, silent=True)
+                                if matched:
+                                    return [k for k, v in sn_map.items() if v == matched][0]
+    except Exception as e:
+        if "not a zip file" not in str(e).lower():
+            pass
+    return None
+
+
+def match_sn_to_folder(sn_num, sn_map, silent=False):
+    if not sn_num:
+        return None
+    if sn_num in sn_map:
+        return sn_map[sn_num]
+    for key, folder in sn_map.items():
+        if key.startswith(sn_num) or sn_num.startswith(key):
+            return folder
+        if sn_num in folder:
+            return folder
+    return None
+
+
+def find_sn_for_folder(folder_path, sn_map=None):
+    folder_name = os.path.basename(folder_path)
+    sn = extract_sn_from_name(folder_name)
+    if sn:
+        return sn
+    try:
+        for item in os.listdir(folder_path):
+            sn = extract_sn_from_name(item)
+            if sn:
+                return sn
+    except Exception:
+        pass
+    if sn_map:
+        try:
+            for item in os.listdir(folder_path):
+                for num in extract_all_long_numbers(item):
+                    matched = match_sn_to_folder(num, sn_map, silent=True)
+                    if matched:
+                        return [k for k, v in sn_map.items() if v == matched][0]
+        except Exception:
+            pass
+    for root, dirs, files in os.walk(folder_path):
+        for fname in files:
+            ext = os.path.splitext(fname)[1].lower()
+            if ext in (".xlsx", ".xls") and not fname.startswith("~$"):
+                fpath = os.path.join(root, fname)
+                sn = extract_sn_from_excel(fpath, sn_map)
+                if sn:
+                    return sn
+    return None
+
+
+def is_calibration_folder(folder_name):
+    return folder_name.lower() in CALIBRATION_FOLDER_VARIANTS
+
+
+def do_copy_file(src, dst):
+    if not DRY_RUN:
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        shutil.copy2(src, dst)
+
+
+def do_copy_tree(src, dst):
+    if not DRY_RUN:
+        os.makedirs(dst, exist_ok=True)
+        shutil.copytree(src, dst, dirs_exist_ok=True)
+
+
+def do_makedirs(path):
+    if not DRY_RUN:
+        os.makedirs(path, exist_ok=True)
+
+
+def count_files(folder):
+    total = 0
+    for root, dirs, files in os.walk(folder):
+        total += len(files)
+    return total
+
+
+# ── PROCESS SINGLE CUSTOMER FOLDER ─────────────────────────────────────────────
+
+def process_customer(customer_folder, all_log_entries, all_errors):
+
+    customer_path = os.path.join(SOURCE_ROOT, customer_folder)
+
+    def log(name, item_type, original, new_path, result):
+        all_log_entries.append({
+            "Customer": customer_folder,
+            "Name": name,
+            "Type": item_type,
+            "Original Location Path": original,
+            "New Location Path": new_path if new_path else "N/A",
+            "Result": result,
+        })
+
+    if not os.path.isdir(customer_path):
+        return
+
+    # Classify top-level items
+    try:
+        top_level = os.listdir(customer_path)
+    except Exception as e:
+        all_errors.append(customer_folder + ": could not list directory - " + str(e))
+        return
+
+    sn_folders, curp_folders, sr_folders = [], [], []
+    curp_container_path = None
+    sr_container_path = None
+    other_items = []
+
+    for item in top_level:
+        item_path = os.path.join(customer_path, item)
+        item_lower = item.lower().strip()
+        if re.match(r'^SN|^S[0-9]', item, re.IGNORECASE) and os.path.isdir(item_path):
+            sn_folders.append(item)
+        elif re.match(r'^CURP', item, re.IGNORECASE) and os.path.isdir(item_path):
+            try:
+                sub_items = os.listdir(item_path)
+                has_curp_children = any(re.match(r'^CURP', s, re.IGNORECASE) for s in sub_items)
+                if has_curp_children or item_lower in ("curp", "curps"):
+                    curp_container_path = item_path
+                else:
+                    curp_folders.append(item)
+            except Exception:
+                curp_folders.append(item)
+        elif re.match(r'^SR', item, re.IGNORECASE) and os.path.isdir(item_path):
+            sr_folders.append(item)
+        elif item_lower in ("service", "1_service", "service reports") and os.path.isdir(item_path):
+            sr_container_path = item_path
+        else:
+            other_items.append(item)
+
+    if curp_container_path:
+        for item in os.listdir(curp_container_path):
+            sub_path = os.path.join(curp_container_path, item)
+            if re.match(r'^CURP', item, re.IGNORECASE) and os.path.isdir(sub_path):
+                curp_folders.append(os.path.join(os.path.basename(curp_container_path), item))
+
+    if sr_container_path:
+        for item in os.listdir(sr_container_path):
+            sub_path = os.path.join(sr_container_path, item)
+            if re.match(r'^SR', item, re.IGNORECASE) and os.path.isdir(sub_path):
+                sr_folders.append(os.path.join(os.path.basename(sr_container_path), item))
+
+    # Build SN map
+    sn_map = {}
+    for sn_folder in sn_folders:
+        sn_num = extract_sn_from_name(sn_folder)
+        if sn_num:
+            sn_map[sn_num] = sn_folder
+
+    # Process CURPs
+    for curp_item in curp_folders:
+        curp_path = os.path.join(customer_path, curp_item)
+        curp_folder = os.path.basename(curp_path)
+        sn_num = find_sn_for_folder(curp_path, sn_map)
+        target_sn = match_sn_to_folder(sn_num, sn_map)
+
+        if target_sn:
+            new_curp_path = os.path.join(OUTPUT_ROOT, target_sn, "2_CURP", curp_folder)
+            if not DRY_RUN:
+                try:
+                    do_copy_tree(curp_path, new_curp_path)
+                except Exception as e:
+                    all_errors.append(customer_folder + " CURP " + curp_folder + ": " + str(e))
+                    log(curp_folder, "folder", curp_path, new_curp_path, "ERROR: " + str(e))
+                    continue
+            log(curp_folder, "folder", curp_path, new_curp_path, "copied")
+            for root, dirs, files in os.walk(curp_path):
+                rel = os.path.relpath(root, curp_path)
+                rel = "" if rel == "." else rel
+                for fname in files:
+                    fpath = os.path.join(root, fname)
+                    new_path = os.path.join(new_curp_path, rel, fname) if rel else os.path.join(new_curp_path, fname)
+                    log(fname, "file", fpath, new_path, "copied")
+        elif sn_num:
+            log(curp_folder, "folder", curp_path, None,
+                "unchanged (SN" + sn_num + " identified but no matching SN folder)")
+        else:
+            log(curp_folder, "folder", curp_path, None, "unchanged (SN could not be determined)")
+
+    # Process SRs
+    for sr_item in sr_folders:
+        sr_path = os.path.join(customer_path, sr_item)
+        sr_folder = os.path.basename(sr_path)
+        sn_num = find_sn_for_folder(sr_path, sn_map)
+        target_sn = match_sn_to_folder(sn_num, sn_map)
+
+        if target_sn:
+            new_sr_path = os.path.join(OUTPUT_ROOT, target_sn, "1_SERVICE", sr_folder)
+            if not DRY_RUN:
+                try:
+                    do_copy_tree(sr_path, new_sr_path)
+                except Exception as e:
+                    all_errors.append(customer_folder + " SR " + sr_folder + ": " + str(e))
+                    log(sr_folder, "folder", sr_path, new_sr_path, "ERROR: " + str(e))
+                    continue
+            log(sr_folder, "folder", sr_path, new_sr_path, "copied")
+            for root, dirs, files in os.walk(sr_path):
+                rel = os.path.relpath(root, sr_path)
+                rel = "" if rel == "." else rel
+                for fname in files:
+                    fpath = os.path.join(root, fname)
+                    new_path = os.path.join(new_sr_path, rel, fname) if rel else os.path.join(new_sr_path, fname)
+                    log(fname, "file", fpath, new_path, "copied")
+        elif sn_num:
+            log(sr_folder, "folder", sr_path, None,
+                "unchanged (SN" + sn_num + " identified but no matching SN folder)")
+        else:
+            log(sr_folder, "folder", sr_path, None, "unchanged (SN could not be determined)")
+
+    # Process SN folders
+    for sn_folder in sn_folders:
+        sn_path = os.path.join(customer_path, sn_folder)
+        new_sn_path = os.path.join(OUTPUT_ROOT, sn_folder)
+
+        # Reference files for duplicate detection
+        reference_files = set()
+        for root, dirs, files in os.walk(sn_path):
+            if "THUMB DRIVE_TEMPLATE" in root:
+                continue
+            for f in files:
+                reference_files.add(f)
+
+        # Handle THUMB DRIVE_TEMPLATE
+        thumb_path = os.path.join(sn_path, "THUMB DRIVE_TEMPLATE")
+        if os.path.isdir(thumb_path):
+            for root, dirs, files in os.walk(thumb_path):
+                for fname in files:
+                    fpath = os.path.join(root, fname)
+                    if fname in reference_files:
+                        log(fname, "file", fpath, None,
+                            "skipped (duplicate in THUMB DRIVE_TEMPLATE)")
+                    else:
+                        misc_dest = os.path.join(new_sn_path, "Misc", fname)
+                        if not DRY_RUN:
+                            do_copy_file(fpath, misc_dest)
+                        log(fname, "file", fpath, misc_dest,
+                            "copied to Misc (unique from THUMB DRIVE_TEMPLATE)")
+
+        # Handle Manual/Calibration folder variants
+        for item in os.listdir(sn_path):
+            item_path = os.path.join(sn_path, item)
+            if os.path.isdir(item_path) and is_calibration_folder(item):
+                for root, dirs, files in os.walk(item_path):
+                    for fname in files:
+                        fpath = os.path.join(root, fname)
+                        parent_lower = os.path.basename(root).lower()
+                        fname_lower = fname.lower()
+                        if "calibration" in parent_lower or fname_lower.startswith("cc"):
+                            dest_sub = "Calibration_Chart"
+                        elif "spare" in parent_lower:
+                            dest_sub = "Misc"
+                        else:
+                            dest_sub = "Manuals"
+                        dest = os.path.join(new_sn_path, dest_sub, fname)
+                        if not DRY_RUN:
+                            do_copy_file(fpath, dest)
+                        log(fname, "file", fpath, dest,
+                            "copied (" + item + " -> " + dest_sub + ")")
+
+        # Create missing template subfolders
+        existing_lower = [e.lower() for e in os.listdir(sn_path)]
+        for subfolder in TEMPLATE_SUBFOLDERS:
+            if subfolder.lower() not in existing_lower:
+                subfolder_path = os.path.join(new_sn_path, subfolder)
+                do_makedirs(subfolder_path)
+                log(subfolder, "folder", "N/A (did not exist)",
+                    subfolder_path, "created (missing template subfolder)")
+
+        # Copy entire SN folder to output
+        if not DRY_RUN:
+            try:
+                do_copy_tree(sn_path, new_sn_path)
+            except Exception as e:
+                all_errors.append(customer_folder + " SN " + sn_folder + ": " + str(e))
+                log(sn_folder, "folder", sn_path, new_sn_path, "ERROR copying: " + str(e))
+                continue
+
+        log(sn_folder, "folder", sn_path, new_sn_path, "copied")
+
+        # Log all files in SN folder
+        for root, dirs, files in os.walk(sn_path):
+            rel = os.path.relpath(root, sn_path)
+            rel = "" if rel == "." else rel
+            for fname in files:
+                fpath = os.path.join(root, fname)
+                new_path = os.path.join(new_sn_path, rel, fname) if rel else os.path.join(new_sn_path, fname)
+                log(fname, "file", fpath, new_path, "copied")
+
+    # Log other loose items
+    for item in other_items:
+        item_path = os.path.join(customer_path, item)
+        item_type = "folder" if os.path.isdir(item_path) else "file"
+        log(item, item_type, item_path, None, "unchanged (could not assign to SN)")
+
+    # Log containers
+    for container in [curp_container_path, sr_container_path]:
+        if container and os.path.isdir(container):
+            item = os.path.basename(container)
+            total_files = sum(len(files) for _, _, files in os.walk(container))
+            log(item, "folder", container, None,
+                "unchanged (container preserved, " + str(total_files) + " files remaining)")
+
+    # Log customer folder
+    log(customer_folder, "folder", customer_path, None,
+        "preserved (copy mode - source intact)")
+
+
+# ── MAIN ───────────────────────────────────────────────────────────────────────
+
+def main():
+    all_log_entries = []
+    all_errors = []
+
+    print("=" * 60)
+    print("BATCH " + MODE + " - All Customer Folders")
+    if DRY_RUN:
+        print("No files will be copied. Preview only.")
+    else:
+        print("Files will be COPIED. Source will NOT be modified.")
+    print("=" * 60)
+
+    # Get all customer folders
+    try:
+        all_folders = sorted(os.listdir(SOURCE_ROOT))
+    except Exception as e:
+        print("ERROR: Could not list source directory: " + str(e))
+        return
+
+    # Filter out non-customer folders
+    customer_folders = []
+    for folder in all_folders:
+        folder_path = os.path.join(SOURCE_ROOT, folder)
+        if not os.path.isdir(folder_path):
+            continue
+        if folder.lower() in SKIP_FOLDERS:
+            print("Skipping: " + folder)
+            continue
+        customer_folders.append(folder)
+
+    total = len(customer_folders)
+    print("\nFound " + str(total) + " customer folders to process\n")
+
+    # Process each customer folder
+    for i, customer_folder in enumerate(customer_folders, 1):
+        print("[" + str(i) + "/" + str(total) + "] Processing: " + customer_folder)
+        try:
+            process_customer(customer_folder, all_log_entries, all_errors)
+        except Exception as e:
+            err = "FATAL ERROR in " + customer_folder + ": " + str(e)
+            print("  " + err)
+            all_errors.append(err)
+
+    # Write combined log
+    print("\nWriting log to: " + LOG_PATH)
+    os.makedirs(DESKTOP, exist_ok=True)
+    with open(LOG_PATH, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=[
+            "Customer", "Name", "Type",
+            "Original Location Path", "New Location Path", "Result"
+        ])
+        writer.writeheader()
+        writer.writerows(all_log_entries)
+
+    # Summary
+    total_items = len(all_log_entries)
+    copied = sum(1 for r in all_log_entries if r["Result"] == "copied" and r["Type"] == "file")
+    unchanged = sum(1 for r in all_log_entries if "unchanged" in r["Result"] and r["Type"] == "file")
+    skipped = sum(1 for r in all_log_entries if "skipped" in r["Result"] and r["Type"] == "file")
+    errors = sum(1 for r in all_log_entries if "ERROR" in r["Result"])
+
+    print("\n" + "=" * 60)
+    print("BATCH " + MODE + " COMPLETE")
+    print("Customer folders processed: " + str(total))
+    print("Total items logged:         " + str(total_items))
+    print("Files copied:               " + str(copied))
+    print("Files unchanged:            " + str(unchanged))
+    print("Files skipped (duplicates): " + str(skipped))
+    print("Errors:                     " + str(errors))
+    if all_errors:
+        print("\nErrors encountered:")
+        for e in all_errors:
+            print("  " + e)
+    print("Log saved to: " + LOG_PATH)
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    main()

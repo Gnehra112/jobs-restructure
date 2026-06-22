@@ -1,0 +1,527 @@
+PS C:\Users\gnehra> python "C:\Users\gnehra\OneDrive - Tripack, LLC\Desktop\batch_restructure.py"
+============================================================
+BATCH DRYRUN - All Customer Folders
+No files will be copied. Preview only.
+============================================================
+Skipping: 1_ARCHIVE_2005-2011
+Skipping: 2_Canceled Orders
+
+Found 485 customer folders to process
+
+[1/485] Processing: 7 Up_Varni Brothers
+[2/485] Processing: 71416031015_TIMBAR (PACKAGING CORP)_70-U43603
+[3/485] Processing: 7583083115_MT_OLIVE_PICKLES
+[4/485] Processing: ASEA
+[5/485] Processing: Abbot Labs
+[6/485] Processing: Accupac
+[7/485] Processing: Acid Products_Prairie Packaging
+[8/485] Processing: Adirondack
+C:\Users\gnehra\AppData\Roaming\Python\Python314\site-packages\openpyxl\reader\workbook.py:118: UserWarning: Print area cannot be set to Defined name: 'SC CARD'!$A:$Q.
+  warn(f"Print area cannot be set to Defined name: {defn.value}.")
+[9/485] Processing: Advertising Resources
+[10/485] Processing: Aerofil
+[11/485] Processing: Agropur
+[12/485] Processing: Ajinomoto
+[13/485] Processing: Alamance Foods
+[14/485] Processing: Albanese
+[15/485] Processing: Alene Candles
+C:\Users\gnehra\AppData\Roaming\Python\Python314\site-packages\openpyxl\worksheet\_reader.py:329: UserWarning: Data Validation extension is not supported and will be removed
+  warn(msg)
+[16/485] Processing: Algoma Orchards
+[17/485] Processing: Algood Foods
+[18/485] Processing: All Pharma
+[19/485] Processing: Alliance
+[20/485] Processing: Alliant Manufacturing
+[21/485] Processing: Alpla
+[22/485] Processing: Alternative Labs (DBA Hall Global)
+[23/485] Processing: Altira
+[24/485] Processing: Amalie Oil Company (AOCUSA)
+[25/485] Processing: Amcor_(old Nuline LSA160)
+[26/485] Processing: American Pasteurization_Chia
+[27/485] Processing: American Pasteurization_Milwaukee
+[28/485] Processing: American Pasturization_Pure Brazilian
+[29/485] Processing: American Sugar Refining (ASR)_Domino Sugar
+[30/485] Processing: Amoretti
+[31/485] Processing: Amresco (VWR chemicals )
+[32/485] Processing: Anchor Hocking
+[33/485] Processing: Apex 360
+[34/485] Processing: Aphena Pharm (Celeste)
+[35/485] Processing: Aphira_Veritiv
+[36/485] Processing: Application Engineering
+[37/485] Processing: Applied Labs
+[38/485] Processing: Armed Forces Brewing
+[39/485] Processing: Ashland
+[40/485] Processing: Assemblers
+[41/485] Processing: Assured Packaging
+[42/485] Processing: Astraluna
+[43/485] Processing: Atlanta Bread
+[44/485] Processing: Atlas Putty (see Weiman) for applicator
+[45/485] Processing: Augusta Label_Repacorp
+[46/485] Processing: Automated Technical Services
+[47/485] Processing: Automatic
+[48/485] Processing: Avadim Health
+[49/485] Processing: B'laster Holdings dba AC Avalanche, LLC
+[50/485] Processing: BA Sports Nutrition_Refresco CURP
+[51/485] Processing: BR Foods
+[52/485] Processing: BSG
+[53/485] Processing: Bacardi
+[54/485] Processing: Bad Sons
+[55/485] Processing: Bajaj Medical
+[56/485] Processing: Ballard Foods (Sold to Harbor House Seafoods)
+[57/485] Processing: Barbasol
+[58/485] Processing: Barleans
+[59/485] Processing: Bay Valley Foods
+[60/485] Processing: Beak & Skiff Brewery
+[61/485] Processing: Beer Republic(DBA IronSheildBrewing)
+[62/485] Processing: Bell & Evans
+[63/485] Processing: Bell Carter
+[64/485] Processing: Bell Plantation
+[65/485] Processing: Belle Chevre
+[66/485] Processing: Berry Globlal
+[67/485] Processing: Beverage Solutions Inc (Formerly Phils Mobile Canning)
+[68/485] Processing: Big B Distibutors
+[69/485] Processing: Bissell
+[70/485] Processing: Bittermilk
+[71/485] Processing: Blank Collective_Orange Construction_Endless West
+[72/485] Processing: Blue Bell
+[73/485] Processing: Blue Water Copacking
+[74/485] Processing: BlueWater CoPack_SocialLLC_RadBrewing_Flat12
+[75/485] Processing: Body Armor
+[76/485] Processing: Bonded Pac
+[77/485] Processing: Bonfire Brewing
+[78/485] Processing: Boss Hallmark
+[79/485] Processing: Brands International
+[80/485] Processing: Braswell Foods
+[81/485] Processing: Breckenridge Brewery
+[82/485] Processing: Brew Kettle
+[83/485] Processing: Brown-Forman
+[84/485] Processing: Buckeye International
+[85/485] Processing: Bumble Bee
+[86/485] Processing: Buzz Ballz
+[87/485] Processing: CCL Label
+[88/485] Processing: CODI
+[89/485] Processing: Cains Foods
+[90/485] Processing: California Mango
+[91/485] Processing: California Olive Ranch
+[92/485] Processing: Calypso(DBA Impact IFS)
+[93/485] Processing: Campari_Wild Turkey
+[94/485] Processing: Cape Ann Brewing
+[95/485] Processing: Capsule Factory
+[96/485] Processing: Carden Labs
+[97/485] Processing: Carefoote Beverage Solutions Inc (Originally owned by Lake of Woods)
+[98/485] Processing: Carlisle Coating
+[99/485] Processing: Carmen Beer
+[100/485] Processing: Catalent Wellness aka Bettera Brands_Queen City Candy
+[101/485] Processing: Catawba Brewery (Palmetto Brewery)
+[102/485] Processing: Cerro Wire
+[103/485] Processing: Certol
+[104/485] Processing: Cerveceria Independiente
+[105/485] Processing: Checkpoint Systems
+[106/485] Processing: Chef Merito
+C:\Users\gnehra\AppData\Roaming\Python\Python314\site-packages\openpyxl\reader\workbook.py:118: UserWarning: Print area cannot be set to Defined name: Parts!$A:$AC.
+  warn(f"Print area cannot be set to Defined name: {defn.value}.")
+C:\Users\gnehra\AppData\Roaming\Python\Python314\site-packages\openpyxl\worksheet\_reader.py:329: UserWarning: Unknown extension is not supported and will be removed
+  warn(msg)
+C:\Users\gnehra\AppData\Roaming\Python\Python314\site-packages\openpyxl\worksheet\header_footer.py:48: UserWarning: Cannot parse header or footer so it will be ignored
+  warn("""Cannot parse header or footer so it will be ignored""")
+[107/485] Processing: Chocolate Packaging & Manufacturing_DBA Crown Chocolate
+[108/485] Processing: Church&Dwight
+[109/485] Processing: Clean Control
+[110/485] Processing: Coal'd Water Distilling Co. (English Mountain Spring Water)
+[111/485] Processing: Coastal Products
+[112/485] Processing: Colgate
+[113/485] Processing: Commerce Brewing
+[114/485] Processing: Conagra
+[115/485] Processing: Connoisserus Products
+[116/485] Processing: Continental Manufacturing Chemist
+[117/485] Processing: Cool Mates
+[118/485] Processing: Core Natural
+[119/485] Processing: Coregistics (SC Johnson) (BELPAK)
+[120/485] Processing: Cornell Dublier
+[121/485] Processing: Cornerstone (used to be Consolidated Design West)
+[122/485] Processing: Cosmos (Tropiclean)
+C:\Users\gnehra\AppData\Roaming\Python\Python314\site-packages\openpyxl\reader\workbook.py:118: UserWarning: Print area cannot be set to Defined name: 'SC CARD'!$A:$L.
+  warn(f"Print area cannot be set to Defined name: {defn.value}.")
+[123/485] Processing: Cosset
+[124/485] Processing: Cosway
+[125/485] Processing: Country Heritage
+[126/485] Processing: Craftpack Beverage
+[127/485] Processing: Crayola
+[128/485] Processing: Creative Werks
+[129/485] Processing: Crescent Park
+[130/485] Processing: Crider Foods
+C:\Users\gnehra\AppData\Roaming\Python\Python314\site-packages\openpyxl\reader\workbook.py:118: UserWarning: Print area cannot be set to Defined name: 'ASSY CARD'!$A:$E.
+  warn(f"Print area cannot be set to Defined name: {defn.value}.")
+C:\Users\gnehra\AppData\Roaming\Python\Python314\site-packages\openpyxl\reader\workbook.py:118: UserWarning: Print area cannot be set to Defined name: 'SC CARD'!$A:$F.
+  warn(f"Print area cannot be set to Defined name: {defn.value}.")
+[131/485] Processing: Crown Valley Winery
+C:\Users\gnehra\AppData\Roaming\Python\Python314\site-packages\openpyxl\reader\workbook.py:118: UserWarning: Print area cannot be set to Defined name: 'ASSEMBLY CARD'!$A:$J.
+  warn(f"Print area cannot be set to Defined name: {defn.value}.")
+[132/485] Processing: DHL
+[133/485] Processing: Davlyn
+[134/485] Processing: Derma Sciences(DBA IntegraLife)
+[135/485] Processing: Diageo
+[136/485] Processing: Dominion Liquid Technology
+[137/485] Processing: Dr Fresh
+[138/485] Processing: Drink Modern Technologies_Brew Bus Brewing
+[139/485] Processing: DryBev (Utility Belt Equipment)
+[140/485] Processing: ED Smith
+[141/485] Processing: EJ Gallo Winery (G3_Haskell)
+[142/485] Processing: EVA
+[143/485] Processing: Eastgate Graphics
+[144/485] Processing: Eco-Med Pharmaceutical
+[145/485] Processing: Ellenos  - Pro Pac
+[146/485] Processing: Ellison Brewing
+[147/485] Processing: Empirical Labs
+[148/485] Processing: Empowered Products
+[149/485] Processing: Empressa Tecnica Brewery
+[150/485] Processing: Encore Wire
+[151/485] Processing: Endless Possibilites ProPac
+[152/485] Processing: Energizer (also Spectrum)
+[153/485] Processing: Evans - Merit - Aluminati
+[154/485] Processing: Exel
+[155/485] Processing: F&F Foods
+[156/485] Processing: Faro Systems
+[157/485] Processing: Fat Heads
+[158/485] Processing: Fill Right Pkg
+[159/485] Processing: Finlay's_Aspen Bev Group
+[160/485] Processing: Fischbach
+[161/485] Processing: Flavor Systems
+[162/485] Processing: Flextronics
+[163/485] Processing: Flighty Mixers (Power Brands)
+[164/485] Processing: Florida Caribbean Distillers
+[165/485] Processing: Flying Foods
+[166/485] Processing: Follmer Development
+[167/485] Processing: Food Specialties
+[168/485] Processing: Formo Products
+[169/485] Processing: Frain Industries
+[170/485] Processing: Fruit Fillings
+[171/485] Processing: Frutarom (Flavor Systems International)
+[172/485] Processing: GEARY BREWING_FORMALLY_Railway City Brewing_(Safety Seal)
+[173/485] Processing: GPI Equipment
+[174/485] Processing: GSI
+[175/485] Processing: Gamblin Artist Colors
+[176/485] Processing: Garden of Flavor (was Nutrifresh)
+[177/485] Processing: Gayston_Precision Impact
+[178/485] Processing: Geodis_Veritiv
+[179/485] Processing: Georgia Nut
+[180/485] Processing: Glanbia
+[181/485] Processing: Global Packaging
+[182/485] Processing: Global Tech
+[183/485] Processing: Go Wild Australia (Bainbridge)
+[184/485] Processing: Gold Label
+[185/485] Processing: Golden Boy
+[186/485] Processing: Golds Pure Foods
+[187/485] Processing: Good Foods
+[188/485] Processing: Gorilla Glue
+[189/485] Processing: Gorilla Mind
+[190/485] Processing: Great River Brewery
+[191/485] Processing: Grecian Delight
+[192/485] Processing: Guardian Drug
+[193/485] Processing: Guru Nanda
+[194/485] Processing: Guy & O'Neill
+[195/485] Processing: H&G Equipment
+[196/485] Processing: H2Ocean
+[197/485] Processing: HBNO
+[198/485] Processing: HEB Ice Cream
+[199/485] Processing: HRR Enterprises
+[200/485] Processing: HVL
+[201/485] Processing: Half Acre Brewing
+[202/485] Processing: Hall Global
+[203/485] Processing: Harbor House Seafoods
+[204/485] Processing: Harpoon Brewery
+[205/485] Processing: Heartland Sweetener
+[206/485] Processing: Heaven Hill
+[207/485] Processing: Heinz
+[208/485] Processing: Hershey
+[209/485] Processing: Hinkle Fine Foods
+[210/485] Processing: Honlulu Cookie
+[211/485] Processing: Hood Container_Packaging Unlimited
+[212/485] Processing: Hop Haus
+[213/485] Processing: Houston Johnson
+[214/485] Processing: ICP
+[215/485] Processing: ICan
+[216/485] Processing: ID Logistics
+[217/485] Processing: IDQ
+[218/485] Processing: IFS Impact
+[219/485] Processing: Illa Canna
+[220/485] Processing: Illling Co
+[221/485] Processing: Impress Foods
+[222/485] Processing: Inmark
+[223/485] Processing: Innovative Flexpack
+[224/485] Processing: Inopak
+[225/485] Processing: Intermountan Nutrition_Automated Technical Services_ATS
+[226/485] Processing: Inventive Private Label
+[227/485] Processing: Island Aseptics
+[228/485] Processing: JMSmucker
+[229/485] Processing: JR Bottling
+[230/485] Processing: Jim Beam
+[231/485] Processing: John B. Sanfilippo (Orchard Harvest)
+[232/485] Processing: Johnson & Johnson
+[233/485] Processing: Johnson Controls
+[234/485] Processing: Joriki Inc
+[235/485] Processing: K-G Spray(PLZ CORP)
+[236/485] Processing: KDC One_Thibiant
+[237/485] Processing: KIK Custom Products
+[238/485] Processing: Kable Packaging
+[239/485] Processing: Kaufman Container
+[240/485] Processing: Kiitos
+[241/485] Processing: King Technology
+[242/485] Processing: Kinsbrae
+[243/485] Processing: Knouse Foods
+[244/485] Processing: Kraft_Heinz Canada
+[245/485] Processing: Krier Foods (Machine sold to Southeast-Bottling)
+[246/485] Processing: L'Oreal
+[247/485] Processing: LNK
+[248/485] Processing: La Colombe
+[249/485] Processing: Labratories Sued
+[250/485] Processing: Lake Tahoe
+[251/485] Processing: Laughing Dog
+[252/485] Processing: Lavant
+[253/485] Processing: Lidestri Foods
+[254/485] Processing: Life Force
+[255/485] Processing: LifeFuels
+[256/485] Processing: Lifetech Resources
+[257/485] Processing: Lincoln Electric
+[258/485] Processing: Listerine
+[259/485] Processing: Little Green Cyclo
+[260/485] Processing: Lonza_Arch Chemical
+[261/485] Processing: Lucas Oil
+[262/485] Processing: Ludford's
+[263/485] Processing: Ludwig Dairy
+[264/485] Processing: Lume Cannabis
+[265/485] Processing: MK Morse
+[266/485] Processing: MSI Express
+[267/485] Processing: MSW
+[268/485] Processing: Maco Bag
+[269/485] Processing: Martec
+[270/485] Processing: Marukome
+[271/485] Processing: Maryland Packaging(FORMALLY_VA Cooperative
+[272/485] Processing: Marzetti
+[273/485] Processing: Mast Global (Limited Brands Bath and Body Works)
+[274/485] Processing: Maybelline
+[275/485] Processing: Mayfield Consumer Products
+[276/485] Processing: McCormick
+[277/485] Processing: McJack Candy
+[278/485] Processing: Melaleuca
+[279/485] Processing: Merit Medical
+[280/485] Processing: Metalloid
+[281/485] Processing: Midlab
+[282/485] Processing: Midland Amsoil
+[283/485] Processing: Mile37 Canning
+[284/485] Processing: Mill Creek Brewing (was Trim Tab Brewing)
+[285/485] Processing: Mineralife
+[286/485] Processing: Misionero
+[287/485] Processing: Modern_Chemical
+[288/485] Processing: Molson Coors (Miller_Proengineering)
+[289/485] Processing: Monarch
+[290/485] Processing: Morton Salt
+[291/485] Processing: Mossberg
+[292/485] Processing: Mother Road Mobile Canning
+[293/485] Processing: Motherlode_Dyetech Equipment
+[294/485] Processing: Mountain Ocean
+[295/485] Processing: National Beverage Corporation
+[296/485] Processing: National Tobacco (TURNING POINT)
+[297/485] Processing: Naturally Fresh_Treehouse Foods
+[298/485] Processing: Nature's Bounty
+[299/485] Processing: Nature's Sunshine
+[300/485] Processing: Nehemiah
+[301/485] Processing: Nestle
+[302/485] Processing: Neuro Brands
+[303/485] Processing: New Holland
+[304/485] Processing: New folder
+[305/485] Processing: Next Century
+[306/485] Processing: Northern Eagle
+[307/485] Processing: Northwest Cosmetics Lab
+[308/485] Processing: Nuline
+[309/485] Processing: Nutrablend
+[310/485] Processing: Nutri Sport
+[311/485] Processing: Nutrix International
+[312/485] Processing: O'Connor Brewing
+[313/485] Processing: O.L. Products
+[314/485] Processing: OC Liquids
+[315/485] Processing: OMI Industries
+[316/485] Processing: OccuSoft_JoveLabs_Ernest
+[317/485] Processing: Ole Smoky
+[318/485] Processing: Omega Sea
+[319/485] Processing: Optimum Nutrition
+[320/485] Processing: Organic Foods Incubator
+[321/485] Processing: Organic Valley
+[322/485] Processing: Oso Brewing
+[323/485] Processing: PCS Gourmet Foods
+[324/485] Processing: PIE
+[325/485] Processing: PL Developments (Aaron Industries)
+[326/485] Processing: PLZ Corp
+[327/485] Processing: PMMI
+[328/485] Processing: Pacha Soap
+[329/485] Processing: Pack-It Company
+[330/485] Processing: Paklab
+[331/485] Processing: Palmer Beverage
+[332/485] Processing: Paramount Ventures (Lavant)
+[333/485] Processing: Patheon
+[334/485] Processing: Peak Bottling
+[335/485] Processing: Pedigree Oven
+[336/485] Processing: Perrigo(DBA Cake Craft_Purcol)
+[337/485] Processing: Petmate Doskocil
+[338/485] Processing: PharmaChemLabs
+[339/485] Processing: Pharmavite
+[340/485] Processing: Phil's Mobile Canning_Bev-Solutions
+[341/485] Processing: Philmo Products (Machine Sold to Berry Global)
+[342/485] Processing: Pogue
+[343/485] Processing: Polar South
+[344/485] Processing: Potosi Brewing
+[345/485] Processing: Power Brands (BEVPACK)
+[346/485] Processing: Power Packaging (MSI Express, H&G Equipment)
+[347/485] Processing: Precision Formulation
+[348/485] Processing: Precision Thermoplastics
+[349/485] Processing: Premier Candle
+[350/485] Processing: Pro Tape
+[351/485] Processing: Proctor & Gamble
+[352/485] Processing: Propac-Reelex
+[353/485] Processing: Publix
+[354/485] Processing: Puckered Pickle
+[355/485] Processing: PuraCoco (formerly CocoJo)
+[356/485] Processing: Pure Brazilian
+[357/485] Processing: Purocol, LLC
+[358/485] Processing: Purpose Built Brands (Weiman Products, Homax)
+[359/485] Processing: Pyrat_Patron
+[360/485] Processing: Q&B FOODS
+[361/485] Processing: Quick Pak
+[362/485] Processing: RB Dwyer
+[363/485] Processing: RB Manufacturing (Reckett Benkiser)
+[364/485] Processing: REFRESCO_Southeast Bottling (Tampa Bay CoPack - Krier)
+[365/485] Processing: RFI Ingredients
+[366/485] Processing: RGA Enterprises
+[367/485] Processing: RR Donnelley (PBM Graphics)
+[368/485] Processing: Ready Pac
+[369/485] Processing: Relion Manufacturing
+[370/485] Processing: Remar
+[371/485] Processing: Rexam
+[372/485] Processing: Reynolds American (American Snuff)
+[373/485] Processing: River City Canning_Lucky Clover
+[374/485] Processing: Rock Tenn
+[375/485] Processing: Rocky Mountain Bio
+[376/485] Processing: Roskam Baking
+[377/485] Processing: SAB Miller
+[378/485] Processing: SDC Nutrition
+[379/485] Processing: SPA
+[380/485] Processing: SRI - Ohio
+[381/485] Processing: Sager
+[382/485] Processing: Saint Gobain
+[383/485] Processing: San Francisco Bay Coffee
+[384/485] Processing: Sanders Research
+[385/485] Processing: Santa Cruz
+[386/485] Processing: Saputo (Southeast Milk Long Life Products Sunshine State Dairy)
+[387/485] Processing: Sascho
+[388/485] Processing: Sauza
+[389/485] Processing: Sazerac Distillers
+[390/485] Processing: Schoeneck Container
+[391/485] Processing: Schwartz Bros
+[392/485] Processing: Service Brewing
+[393/485] Processing: Shanks Extracts
+[394/485] Processing: Shurtech (Shurtape)
+[395/485] Processing: Siddha Remedies
+[396/485] Processing: Silgan
+[397/485] Processing: Silver Springs
+[398/485] Processing: Sioux Bee Honey (Shorr)
+[399/485] Processing: Skyline Chili
+[400/485] Processing: Social LLC (Formally Flat 12)
+[401/485] Processing: Solina_Lynch Foods
+[402/485] Processing: Solo Labs
+[403/485] Processing: Sourcecap
+[404/485] Processing: Specialty Manufacturing
+[405/485] Processing: Speidell
+[406/485] Processing: Star Candle
+[407/485] Processing: Steamworks Brewery
+[408/485] Processing: Stellar  - TriStar
+[409/485] Processing: Sterno Group
+[410/485] Processing: Stihl
+[411/485] Processing: Strainrite Companies
+[412/485] Processing: Strong Spirits
+[413/485] Processing: Stubborn Brothers Brewery
+[414/485] Processing: Sturm Foods_Treehouse Foods
+[415/485] Processing: Sugar Mill Distilling, LLC
+[416/485] Processing: Suja Life (Precision Formulation)
+[417/485] Processing: Summerfresh
+[418/485] Processing: Summit (was First Fruits and Trinity)
+[419/485] Processing: Sundance
+[420/485] Processing: Sunland
+[421/485] Processing: Swisher_PL Developments_Rogue Holdings
+[422/485] Processing: Szaidel Cosmetic
+[423/485] Processing: Talking Rain_PRO PAC
+[424/485] Processing: Team Tech Molding
+[425/485] Processing: Team World (Omso)
+[426/485] Processing: Technical Chemical
+[427/485] Processing: Tennessee Distilling
+[428/485] Processing: Thai Union (Chicken of the Sea)
+[429/485] Processing: Think Packaging
+[430/485] Processing: Thornton Industries
+[431/485] Processing: Three Brothers Winery
+[432/485] Processing: Three Springs Bottling (Western Spirts)
+[433/485] Processing: Total Body Care
+[434/485] Processing: Towne Park
+[435/485] Processing: Traders Point
+[436/485] Processing: Tradewinds
+[437/485] Processing: Trailbreaker- Whiskey Barrel
+[438/485] Processing: Traina Foods
+[439/485] Processing: Treehouse
+[440/485] Processing: Tricorbraun
+[441/485] Processing: Tripack
+[442/485] Processing: Triple H Foods_Pacific Choice
+[443/485] Processing: Triumph Pharmaceuticals_Continental Manufacturing Chemist
+[444/485] Processing: Trividia_PJ Noyes
+[445/485] Processing: Trobetter
+[446/485] Processing: Tropical Resources
+[447/485] Processing: Turner Plastics
+[448/485] Processing: US Nonwovens
+[449/485] Processing: USST_Rock Tenn_West Rock
+[450/485] Processing: UST Corp
+[451/485] Processing: Unilever
+[452/485] Processing: United Packaging Group
+[453/485] Processing: United Pet Group (Spectrum Brands)
+[454/485] Processing: VA Co-op
+[455/485] Processing: VVF (Thriving Brands)
+[456/485] Processing: Valentine
+[457/485] Processing: Vee Pak
+[458/485] Processing: Veronicas Salsa
+[459/485] Processing: Very Good MFG
+[460/485] Processing: ViJon
+[461/485] Processing: Viso Energy
+[462/485] Processing: Vista Industrial
+[463/485] Processing: Visual Pak
+[464/485] Processing: Vortex Labs (Church and Dwight , Supplement Sciences)
+[465/485] Processing: WEIMAN PRODUCTS (HOMAX GROUP)
+[466/485] Processing: WM Barr
+[467/485] Processing: Waco Bottling (was Flavorcraft (was Cooper Vision))
+[468/485] Processing: Wasatch Labs
+[469/485] Processing: We Pack It_House of Cheatham
+[470/485] Processing: WePackIt
+[471/485] Processing: Weaver Popcorn
+[472/485] Processing: Wee Bee Honey
+[473/485] Processing: Wellington Foods
+[474/485] Processing: Wells Dairy
+[475/485] Processing: West Link
+[476/485] Processing: Westrock
+[477/485] Processing: Whitewave (Wallaby Yogurt)
+[478/485] Processing: Wildwood Brewery
+[479/485] Processing: Wings
+[480/485] Processing: World Waters (Bainbridge Beverage & Captiva)
+[481/485] Processing: Xttrium Labs
+[482/485] Processing: YaYa Foods
+[483/485] Processing: Yoi Fresh
+[484/485] Processing: ZEP
+[485/485] Processing: Zotos
+
+Writing log to: C:\Users\gnehra\OneDrive - Tripack, LLC\Desktop\batch_restructure_DRYRUN_20260617_094243.csv
+
+============================================================
+BATCH DRYRUN COMPLETE
+Customer folders processed: 485
+Total items logged:         127342
+Files copied:               115986
+Files unchanged:            404
+Files skipped (duplicates): 1510
+Errors:                     0
+Log saved to: C:\Users\gnehra\OneDrive - Tripack, LLC\Desktop\batch_restructure_DRYRUN_20260617_094243.csv
+============================================================
+PS C:\Users\gnehra>
